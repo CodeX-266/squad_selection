@@ -9,9 +9,9 @@ export const HeroCanvas: React.FC = () => {
       {/* 2D Overlay (Gradient for readability) */}
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#040f08]/90 via-transparent to-[#040f08]/90 pointer-events-none" />
 
-      {/* Fixed Navigation */}
-      <header className="relative z-20 w-full px-6 py-6 md:px-12 md:py-8 flex justify-between items-center mix-blend-difference">
-        <div className="font-display text-2xl tracking-widest text-white uppercase select-none">
+      {/* Fixed Navigation with generous top, left, and right padding */}
+      <header className="relative z-20 w-full px-8 pt-8 pb-4 md:px-16 md:pt-10 md:pb-6 lg:px-20 flex justify-between items-center mix-blend-difference">
+        <div className="font-display text-2xl md:text-3xl tracking-widest text-white uppercase select-none">
           Matchday
         </div>
         <a
