@@ -1,27 +1,137 @@
 /* ─── Google Fonts ─────────────────────────────────────────────────────────── */
-@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=IBM+Plex+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
 
 @import "tailwindcss";
 
-/* ─── Design tokens ────────────────────────────────────────────────────────── */
+/* ─── Design Tokens ────────────────────────────────────────────────────────── */
 @theme {
-  /* Palette */
-  --color-pitch:        #0d3b1e;
-  --color-turf:         #1a5c32;
-  --color-tactics-dark: #060e08;
-  --color-floodlight:   #f5e642;
-  --color-chalk:        #e8e4d4;
-  --color-invalid:      #c0392b;
-  --color-valid:        #27ae60;
+  --color-pitch: #0d3b1e;
+  --color-turf: #1a5c32;
+  --color-tactics-dark: #040f08;
+  --color-floodlight: #f5e642;
+  --color-chalk: #ffffff;
+  --color-invalid: #c0392b;
+  --color-valid: #27ae60;
   --color-amber-accent: #e67e22;
 
-  /* Typography */
-  --font-display: "Barlow Condensed", system-ui, sans-serif;
-  --font-mono:    "IBM Plex Mono", "Courier New", monospace;
-  --font-ui:      "DM Sans", system-ui, sans-serif;
+  /* Tactical Palette */
+  --color-background: #0d0f0e;
+  --color-surface: #121414;
+  --color-charcoal-surface: #1a1d1c;
+  --color-mint-accent: #a7c4b5;
+  --color-forest-muted: #4a5d54;
+  --color-status-warning: #d4a373;
+  --color-status-critical: #e26d6d;
+  --color-on-surface: #e2e2e2;
+  --color-on-surface-variant: #8b928e;
+
+  /* Fonts */
+  --font-display: "Anton", sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
-/* ─── Base reset ───────────────────────────────────────────────────────────── */
+/* ─── Tactical Helpers ─────────────────────────────────────────────────────── */
+.ghost-border {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.divider {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pitch-lines {
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  position: relative;
+}
+
+.pitch-lines::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  border-left: 1.5px solid rgba(255, 255, 255, 0.12);
+}
+
+.pitch-lines::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+}
+
+.pitch-box {
+  position: absolute;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+}
+
+.node-glow {
+  box-shadow: 0 0 10px rgba(167, 196, 181, 0.5);
+}
+
+.node-gk {
+  border-color: #a7c4b5;
+  color: #a7c4b5;
+}
+
+.node-def {
+  border-color: #4a5d54;
+  color: #4a5d54;
+}
+
+.node-fwd {
+  border-color: #d4a373;
+  color: #d4a373;
+}
+
+.node-uti {
+  border-color: #9aa0a7;
+  color: #9aa0a7;
+}
+
+.progress-segment {
+  width: calc(100% / 7 - 2px);
+  margin-right: 2px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1px;
+}
+
+.progress-segment.filled {
+  background: #a7c4b5;
+}
+
+.progress-segment.filled-warn {
+  background: #d4a373;
+}
+
+.progress-segment.filled-crit {
+  background: #e26d6d;
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Base Reset ───────────────────────────────────────────────────────────── */
 *,
 *::before,
 *::after {
@@ -35,54 +145,78 @@ html {
 }
 
 body {
-  background-color: #060e08;
-  color: #e8e4d4;
-  font-family: "DM Sans", system-ui, sans-serif;
+  background-color: #040f08;
+  color: #ffffff;
+  font-family: "Inter", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* ─── Selection highlight ──────────────────────────────────────────────────── */
-::selection {
-  background: rgba(245, 230, 66, 0.25);
-  color: #e8e4d4;
+/* ─── Hero Custom Animations ────────────────────────────────────────────────── */
+@keyframes floodlight {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
 }
 
-/* ─── Focus ring ───────────────────────────────────────────────────────────── */
-:focus-visible {
-  outline: 2px solid #f5e642;
-  outline-offset: 2px;
-  border-radius: 4px;
+.floodlight-accent {
+  background: radial-gradient(circle at center, rgba(245, 230, 66, 0.18) 0%, transparent 65%);
+  animation: floodlight 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(4deg);
+  }
+}
+
+.ball-float {
+  animation: float 6s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+
+.ball-float:hover {
+  transform: scale(1.06) rotate(8deg);
+  animation-play-state: paused;
+}
+
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s infinite ease-in-out;
 }
 
 /* ─── Scrollbar ────────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #060e08;
+  background: #0d0f0e;
 }
+
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.12);
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.22);
-}
-
-/* ─── Checkbox custom styling ──────────────────────────────────────────────── */
-input[type="checkbox"] {
-  accent-color: #27ae60;
-}
-
-/* ─── Reduced motion ───────────────────────────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
 }

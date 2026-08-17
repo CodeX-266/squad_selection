@@ -1,5 +1,4 @@
 import React, { lazy, Suspense } from "react";
-import { motion } from "framer-motion";
 import { CheckerSection } from "./components/checker/CheckerSection";
 import { ReducedMotionHero } from "./components/hero/ReducedMotionHero";
 import { GlowCursor } from "./components/GlowCursor";
@@ -43,34 +42,24 @@ export default function App() {
       {/* SEO */}
       <title>MATCHDAY — Squad Constraint Checker</title>
 
-      {/* ── Hero section ── */}
-      {prefersReducedMotion ? (
-        <ReducedMotionHero />
-      ) : (
-        <Suspense fallback={<HeroLoadingFallback />}>
-          <HeroCanvas />
-        </Suspense>
-      )}
+      {/* ── Hero section (Fixed in background) ── */}
+      <div className="fixed top-0 left-0 w-full h-screen z-0">
+        {prefersReducedMotion ? (
+          <ReducedMotionHero />
+        ) : (
+          <Suspense fallback={<HeroLoadingFallback />}>
+            <HeroCanvas />
+          </Suspense>
+        )}
+      </div>
 
-      {/* ── Transition bridge ── */}
-      <motion.div
-        className="relative z-10 h-16 w-full"
-        style={{
-          background:
-            "linear-gradient(to bottom, transparent, #060e08)",
-        }}
-        aria-hidden="true"
-      />
+      {/* Spacer to push the checker section down below the hero */}
+      <div className="h-screen w-full relative z-10 pointer-events-none" aria-hidden="true" />
 
-      {/* ── Checker section ── */}
-      <CheckerSection />
-
-      {/* ── Footer ── */}
-      <footer className="border-t border-white/8 bg-tactics-dark px-4 py-8 text-center">
-        <p className="font-mono text-xs uppercase tracking-widest text-chalk/25">
-          MATCHDAY · Squad Constraint Checker · Rules-only validation tool
-        </p>
-      </footer>
+      {/* ── Checker section (Scrolls over Hero) ── */}
+      <div id="checker-container" className="relative z-20 w-full bg-surface-container-lowest shadow-[0_-20px_60px_rgba(0,0,0,0.8)]">
+        <CheckerSection />
+      </div>
     </main>
   );
 }

@@ -168,13 +168,16 @@ function initRobotScene(canvas: HTMLCanvasElement, container: HTMLElement) {
 
   let raf = 0;
   let stopped = false;
-  const clock = new THREE.Clock();
+  let lastTime = performance.now();
+  const startTime = performance.now();
 
   function animate() {
     if (stopped) return;
     raf = requestAnimationFrame(animate);
-    const dt = clock.getDelta();
-    const elapsed = clock.getElapsedTime();
+    const now = performance.now();
+    const dt = (now - lastTime) / 1000;
+    lastTime = now;
+    const elapsed = (now - startTime) / 1000;
 
     if (mixer) mixer.update(dt);
 
