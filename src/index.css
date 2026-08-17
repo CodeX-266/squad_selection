@@ -1,0 +1,88 @@
+/* ─── Google Fonts ─────────────────────────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=IBM+Plex+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap");
+
+@import "tailwindcss";
+
+/* ─── Design tokens ────────────────────────────────────────────────────────── */
+@theme {
+  /* Palette */
+  --color-pitch:        #0d3b1e;
+  --color-turf:         #1a5c32;
+  --color-tactics-dark: #060e08;
+  --color-floodlight:   #f5e642;
+  --color-chalk:        #e8e4d4;
+  --color-invalid:      #c0392b;
+  --color-valid:        #27ae60;
+  --color-amber-accent: #e67e22;
+
+  /* Typography */
+  --font-display: "Barlow Condensed", system-ui, sans-serif;
+  --font-mono:    "IBM Plex Mono", "Courier New", monospace;
+  --font-ui:      "DM Sans", system-ui, sans-serif;
+}
+
+/* ─── Base reset ───────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #060e08;
+  color: #e8e4d4;
+  font-family: "DM Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── Selection highlight ──────────────────────────────────────────────────── */
+::selection {
+  background: rgba(245, 230, 66, 0.25);
+  color: #e8e4d4;
+}
+
+/* ─── Focus ring ───────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #f5e642;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Scrollbar ────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #060e08;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* ─── Checkbox custom styling ──────────────────────────────────────────────── */
+input[type="checkbox"] {
+  accent-color: #27ae60;
+}
+
+/* ─── Reduced motion ───────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
