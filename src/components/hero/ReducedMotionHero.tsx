@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 
 /**
  * Reduced-motion fallback hero — shown when prefers-reduced-motion is active.

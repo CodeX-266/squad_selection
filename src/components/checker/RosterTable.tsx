@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { ROSTER } from "../../data/roster";
 import { useSquadStore } from "../../store/squadStore";
 import type { Position } from "../../types/squad";

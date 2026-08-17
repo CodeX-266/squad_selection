@@ -1,5 +1,5 @@
 import React, { useRef, useMemo, useCallback, useEffect } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { type ThreeEvent, useFrame, useThree } from "@react-three/fiber";
 import { useScroll } from "@react-three/drei";
 import * as THREE from "three";
 

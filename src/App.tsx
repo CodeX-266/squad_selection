@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { CheckerSection } from "./components/checker/CheckerSection";
 import { ReducedMotionHero } from "./components/hero/ReducedMotionHero";
 import { GlowCursor } from "./components/GlowCursor";
-import { RobotGuide } from "./components/RobotGuide";
 
 // Lazy-load the heavy 3D bundle so the checker is usable immediately
 const HeroCanvas = lazy(() =>
