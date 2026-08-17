@@ -14,8 +14,8 @@ export const HeroCanvas: React.FC = () => {
         <div className="font-display text-2xl tracking-widest text-white uppercase select-none">
           Matchday
         </div>
-        <a 
-          href="#checker" 
+        <a
+          href="#checker"
           className="text-sm font-bold uppercase tracking-wider text-[#f5e642] hover:text-white transition-colors duration-300 flex items-center gap-2"
         >
           Coach's Desk
@@ -26,36 +26,39 @@ export const HeroCanvas: React.FC = () => {
         </a>
       </header>
 
-      {/* Main Hero Content */}
-      <main className="relative z-10 flex-1 flex flex-col items-center justify-center w-full px-4 text-center">
+      {/* Full-Screen 3D Interactive Canvas */}
+      <div className="absolute inset-0 w-full h-full z-10">
+        <Canvas
+          className="w-full h-full"
+          camera={{ position: [0, 0, 4.8], fov: 40 }}
+          dpr={[1, 2]}
+          gl={{
+            antialias: true,
+            alpha: true,
+            powerPreference: "high-performance",
+          }}
+        >
+          <Suspense fallback={null}>
+            <InteractiveBall />
+          </Suspense>
+        </Canvas>
+      </div>
+
+      {/* Main Hero Content (Typography & Accents) */}
+      <main className="relative z-20 flex-1 flex flex-col items-center justify-centre pb-24 w-full px-4 text-center pointer-events-none">
         {/* Floodlight Background Effect */}
         <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[60vw] h-[60vw] md:w-[40vw] md:h-[40vw] max-w-[800px] max-h-[800px] rounded-full floodlight-accent blur-3xl"></div>
+          <div className="w-[60vw] h-[60vw] md:w-[40vw] md:h-[40vw] max-w-[800px] max-h-[800px] rounded-full floodlight-accent blur-3xl opacity-50"></div>
         </div>
 
-        {/* Central Interactive 3D Ball */}
-        <div className="relative z-10 mb-8 md:mb-12 cursor-pointer ball-float group w-[220px] h-[220px] md:w-[280px] md:h-[280px]">
-          <Canvas
-            className="absolute inset-0 w-full h-full"
-            camera={{ position: [0, 0, 3], fov: 45 }}
-            dpr={[1, 2]}
-            gl={{
-              antialias: true,
-              alpha: true,
-              powerPreference: "high-performance",
-            }}
-          >
-            <Suspense fallback={null}>
-              <InteractiveBall />
-            </Suspense>
-          </Canvas>
-          {/* Subtle shadow below the 3D ball */}
-          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-28 h-5 bg-black/60 blur-md rounded-[100%] transition-transform duration-300 group-hover:scale-110 opacity-70"></div>
+        {/* Dynamic contact shadow for the ball */}
+        <div className="relative mb-6">
+          <div className="w-36 h-6 bg-black/80 blur-lg rounded-[100%] mx-auto opacity-75"></div>
         </div>
 
         {/* Typography */}
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col gap-2 md:gap-4 pointer-events-none">
-          <h1 className="font-display text-6xl md:text-8xl lg:text-9xl text-white uppercase tracking-tighter drop-shadow-[0_4px_20px_rgba(0,0,0,0.8)] leading-[0.9]">
+          <h1 className="font-display text-6xl md:text-8xl lg:text-9xl text-white uppercase tracking-tighter drop-shadow-[0_4px_15px_rgba(0,0,0,0.8)] leading-[0.9]">
             Matchday
           </h1>
           <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6 mt-4 md:mt-8 text-sm md:text-lg font-light text-white/80 tracking-wide">

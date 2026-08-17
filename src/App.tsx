@@ -57,7 +57,7 @@ export default function App() {
       <div className="h-screen w-full relative z-10 pointer-events-none" aria-hidden="true" />
 
       {/* ── Checker section (Scrolls over Hero) ── */}
-      <div id="checker-container" className="relative z-20 w-full bg-surface-container-lowest shadow-[0_-20px_60px_rgba(0,0,0,0.8)]">
+      <div id="checker" className="relative z-20 w-full bg-[#0b0e0d] shadow-[0_-20px_60px_rgba(0,0,0,0.8)] scroll-mt-0">
         <CheckerSection />
       </div>
     </main>
